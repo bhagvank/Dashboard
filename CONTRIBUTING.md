@@ -3,7 +3,7 @@
 
 Step 1: Feature Request
 ======================================
-Start putting a [feature request](https://github.com/bhagvank/Montecarlo_Quant/blob/master/.github/ISSUE_TEMPLATE/feature_request.md) for your idea...
+Start putting a [feature request](https://github.com/bhagvank/Dashboard/blob/master/.github/ISSUE_TEMPLATE/feature_request.md) for your idea...
 
 
 
