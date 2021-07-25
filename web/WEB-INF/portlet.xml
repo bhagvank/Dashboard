@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app id="simplest" version="1.0">
+  <portlet id="Simplest">
+    <portlet-name>Simplest</portlet-name>
+    <display-name>Simple Display Name</display-name>
+    <portlet-class>Simplest</portlet-class>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>VIEW</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <portlet-info>
+      <title>Simple Title</title>
+      <short-title>The world's simplest portlet</short-title>
+    </portlet-info>
+  </portlet>
+</portlet-app>
+

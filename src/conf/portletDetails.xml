@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : portletDetails.xml
+    Created on : March 9, 2006, 3:12 PM
+    Author     : bhagvank
+    Description:
+        Purpose of the document follows.
+-->
+
+<portlets>
+<portlet name="topcategories">
+<default viewtype="verticalbar"/>
+<queries>
+<query stringtemplate=" " dbType="postgres">
+<params>
+    <param>
+        
+    </param>
+</params>    
+</query>
+<query stringtemplate=" " dbType="oracle">   
+<params>
+    <param>
+        
+    </param>
+</params>
+</query>           
+</queries>
+<actions>
+ <action name="edit" forward="editChartPortlet.jsp"/>
+ <action name="view" forward="viewChartPortlet.jsp"/>
+ <action name="help" forward="helpChartPortlet.jsp"/>
+</actions>
+</portlet>
+<portlet name="topcategorieslastmonth">
+<default viewtype="tabular"></default>
+<queries>
+<query stringtemplate=" " dbType="postgres">
+<params>
+    <param>
+        
+    </param>
+</params>    
+</query>
+<query stringtemplate=" " dbType="oracle">   
+<params>
+    <param>
+        
+    </param>
+</params>
+</query>           
+</queries>
+<actions>
+ <action name="edit" forward="editChartPortlet.jsp"/>
+ <action name="view" forward="viewChartPortlet.jsp"/>
+ <action name="help" forward="helpChartPortlet.jsp"/>
+</actions>
+</portlet>
+<portlet name="topdesthosts">
+<default viewtype="verticalbar"></default>    
+<queries>
+<query stringtemplate=" " dbType="postgres">
+<params>
+    <param>
+        
+    </param>
+</params>    
+</query>
+<query stringtemplate=" " dbType="oracle">   
+<params>
+    <param>
+        
+    </param>
+</params>
+</query>           
+</queries>
+<actions>
+ <action name="edit" forward="editChartPortlet.jsp"/>
+ <action name="view" forward="viewChartPortlet.jsp"/>
+ <action name="help" forward="helpChartPortlet.jsp"/>
+</actions>
+</portlet>
+<portlet name="topsourcehosts">
+<default viewtype="verticalbar"></default>    
+<queries>
+<query stringtemplate=" " dbType="postgres">
+<params>
+    <param>
+        
+    </param>
+</params>    
+</query>
+<query stringtemplate=" " dbType="oracle">   
+<params>
+    <param>
+        
+    </param>
+</params>
+</query>           
+</queries>
+<actions>
+ <action name="edit" forward="editChartPortlet.jsp"/>
+ <action name="view" forward="viewChartPortlet.jsp"/>
+ <action name="help" forward="helpChartPortlet.jsp"/>
+</actions>
+</portlet>
+<portlet name="topusers">
+<default viewtype="tabular"></default>
+<queries>
+<query stringtemplate=" " dbType="postgres">
+<params>
+    <param>
+        
+    </param>
+</params>    
+</query>
+<query stringtemplate=" " dbType="oracle">   
+<params>
+    <param>
+        
+    </param>
+</params>
+</query>           
+</queries>
+<actions>
+ <action name="edit" forward="editChartPortlet.jsp"/>
+ <action name="view" forward="viewChartPortlet.jsp"/>
+ <action name="help" forward="helpChartPortlet.jsp"/>
+</actions>
+</portlet> 
+<portlet name="topuserslastmonth">
+<default viewtype="tabular"></default>
+    <queries>
+<query stringtemplate=" " dbType="postgres">
+<params>
+    <param>
+        
+    </param>
+</params>    
+</query>
+<query stringtemplate=" " dbType="oracle">   
+<params>
+    <param>
+        
+    </param>
+</params>
+</query>           
+</queries>
+<actions>
+ <action name="edit" forward="editChartPortlet.jsp"/>
+ <action name="view" forward="viewChartPortlet.jsp"/>
+ <action name="help" forward="helpChartPortlet.jsp"/>
+</actions>
+</portlet>
+<!--
+<portlet name="topprotocols">
+<default viewtype="tabular"></default>    
+</portlet>
+<portlet name="topbandwidthusage">
+<default viewtype="horizontalbar"></default>    
+</portlet>
+-->
+</portlets>

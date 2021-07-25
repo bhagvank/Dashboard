@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  - Application context definition for "example" DispatcherServlet.
+  -->
+<beans>
+
+	<!--
+	  - Due to the dispatcher mapping in web.xml and the default BeanNameUrlHandlerMapping
+	  - in this context, "http://localhost/example/test" will trigger this controller.
+	  -
+	  - Due to the default InternalResourceViewResolver, returned view names get treated
+	  - as internal resources, e.g. JSPs: "/test.jsp" or "/WEB-INF/jsp/test.jsp" will
+	  - render the respective file. So with the default resolver, controllers have to
+	  - specify the whole resource path as view name (see below for an alternative).
+	  -
+	  - HandlerMapping and ViewResolver are simple interfaces: Choose one of Spring's
+	  - provided implementations, or write your own one.
+	  -
+	  - A very simple Controller implementation could look as follows:
+	  -
+	  -   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	  -     return new ModelAndView("/test.jsp");
+	  -   }
+	  -
+	  - Or for writing the response directly:
+	  -
+	  -   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	  -     response.getWriter().write("This is a test");
+	  -     return null;
+	  -   }
+    -->
+       <!--  <bean id="dwrController" class= "org.springframework.web.servlet.mvc.ServletWrappingController">
+          <property name="servletClass">
+            <value>uk.ltd.getahead.dwr.DWRServlet</value>
+          </property>
+          <property name="initParameters">
+            <props>
+              <prop key="debug">true</prop>
+            </props>
+          </property>
+        </bean> -->
+
+
+
+	<bean id="dashboard" class="org.reubo.dashboard.controller.DashboardController">
+        <property name="methodNameResolver">
+            <bean class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+                    <property name="mappings">
+                            <props>
+                              <prop key="/welcome.jsp">handleWelcome</prop>
+                              <prop key="/header.jsp">handleHeader</prop>
+                               <prop key="/ViewNewPortlets.jsp">handleNewPortlets</prop>
+                               <prop key="/ViewAlerts.jsp">handleAlerts</prop>
+                               <prop key="/ViewHighLevelTrends.jsp">handleTrends</prop>
+                               <prop key="/ViewNewReports.jsp">handleReports</prop>      
+                               <prop key="/Preferences.jsp">handlePreferences</prop>
+                            </props>
+                    </property>
+            </bean>
+		</property>
+        <!-- <property name="DAO" ref="sqlClinic"/> -->
+             <property name="delegate" ref="businessDelegate"/>
+        </bean>
+        <bean id="businessDelegate" class="org.reubo.dashboard.delegate.BusinessDelegate">
+            <property name="cachingService" ref="cachingService"/>
+            <property name="reportingService" ref="reportingService"/>
+            <property name="templatingService" ref="templatingService"/>
+            <property name="chartingService" ref="chartingService"/>
+            <property name="riskDashboardManager" ref="riskDashboardManager"/>
+            <property name="categoryGroupManager" ref="categoryGroupManager"/>
+            <property name="personalizationManager" ref="personalizationManager"/>
+        </bean>
+        <bean id="cachingService" class="org.reubo.dashboard.services.cache.CacheImpl"/>
+        <bean id="reportingService" class="org.reubo.dashboard.services.reporting.JasperReportingService"/>
+        <bean id="templatingService" class="org.reubo.dashboard.services.templating.TemplatingService"/>
+        <bean id="chartingService" class="org.reubo.dashboard.services.charting.JFreeChartServiceImpl"/>
+        <bean id="riskDashboardManager" class="org.reubo.dashboard.services.persistence.RiskDashboardManager">
+            <property name="riskDashboardDAO" ref="riskDashboardDAO"/>
+        </bean>    
+        <bean id="riskDashboardDAO" class="org.reubo.dashboard.services.persistence.RiskDashboardDAO">
+              <property name="dataSource" ref="dataSource"/>    
+        </bean>
+                
+<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+           <property name="interceptors">
+			<list>
+				<ref bean="signonInterceptor"/>
+		       	</list>
+		</property>
+                <property name="mappings">
+                           <props> 
+                               <prop key="/header.jsp">dashboard</prop>
+                               <prop key="/welcome.jsp">dashboard</prop>
+                               <prop key="/ViewNewPortlets.jsp">dashboard</prop>
+                               <prop key="/ViewAlerts.jsp">dashboard</prop>
+                               <prop key="/ViewHighLevelTrends.jsp">dashboard</prop>
+                               <prop key="/ViewNewReports.jsp">dashboard</prop>  
+                               <prop key="/Preferences.jsp">dashboard</prop>
+                            </props> 
+
+                 </property>
+        </bean>
+        <!-- <bean id="dwrUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+<property name="alwaysUseFullPath" value="true"/>
+  <property name="mappings">
+  <props>
+ <prop key="/dwr/**/*">dwrController</prop>
+ </props>
+</property>
+</bean>
+-->
+    <bean id="signonInterceptor" class="org.reubo.common.sso.SignonInterceptor"/>
+
+	<!--
+	  - Optional: Explicit InternalResourceViewResolver definition,
+	  - specifying view class, name prefix, and name suffix.
+	  -
+	  - Specifying the JstlView class instead of the default InternalResourceView
+	  - exports Spring's message source and the current user locale as standard
+	  - JSTL attributes, to be leveraged by JSTL fmt tags.
+	  -
+	  - A prefix/suffix combination allows for symbolic view names to be returned
+	  - by controllers, still getting straightly mapped to internal resources.
+	  - Example: view name "test" -> resource "/WEB-INF/jsp/test.jsp".
+	  -
+	  - For more sophisticated mappings, consider ResourceBundleViewResolver
+	  - (see "webapp-typical" skeleton) or XmlViewResolver.
+	  -->
+        
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
+		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+	</bean>
+        
+
+</beans>
